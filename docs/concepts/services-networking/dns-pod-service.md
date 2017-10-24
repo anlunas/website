@@ -397,6 +397,9 @@ Kubernetes installs do not configure the nodes' resolv.conf files to use the
 cluster DNS by default, because that process is inherently distro-specific.
 This should probably be implemented eventually.
 
+Pods in StatefulSets are not able to resolve their peers via short hostnames. The [Headless
+Service](/docs/concepts/services-networking/service/#headless-services) is not part of the domain search records in /etc/resolv.conf (i.e. headlesssvc.ns.svc.cluster.local). Find the open feature request [here](https://github.com/kubernetes/kubernetes/issues/42544)
+
 Linux's libc is impossibly stuck ([see this bug from
 2005](https://bugzilla.redhat.com/show_bug.cgi?id=168253)) with limits of just
 3 DNS `nameserver` records and 6 DNS `search` records.  Kubernetes needs to
